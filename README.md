@@ -2,4 +2,4 @@
 
 ## npm install
 
-### node main.js 
+### node main.js
