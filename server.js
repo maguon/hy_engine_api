@@ -2,6 +2,8 @@ const path = require('path');
 const restify = require('restify');
 const Errors = require('restify-errors');
 const corsMiddleware = require('restify-cors-middleware');
+const user = require('./bl/User');
+
 
 const createServer=()=>{
 
@@ -37,10 +39,19 @@ const createServer=()=>{
         rate: 50,
         ip: true
     }));
+    server.use(restify.plugins.bodyParser({uploadDir:__dirname+'/../uploads/'}));
+    server.use(restify.plugins.acceptParser(server.acceptable));
+    server.use(restify.plugins.dateParser());
+    server.use(restify.plugins.authorizationParser());
+    server.use(restify.plugins.queryParser());
+    server.use(restify.plugins.gzipResponse());
 
     server.get('/docs/*', // don't forget the `/*`
         restify.plugins.serveStaticFiles('./public/docs')
     );
+    server.get('/api/user', user.queryUser);
+    server.get('/api/user/:userId', user.updateUser);
+    server.post({path:'/api/user',contentType: 'application/json'}, user.addUser);
 
     server.on('NotFound', function (req, res ,err,next) {
         const error = new Errors.NotFoundError()
