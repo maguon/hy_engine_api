@@ -27,7 +27,9 @@ const pgConfig = {
     connectOptions :{
         host: 'localhost',
         port: 5432,
-        database: 'test_db'
+        database: 'hy_engine',
+        user: 'myxxjs_root',
+        password: 'myxxjs2016'
     }
 }
 
