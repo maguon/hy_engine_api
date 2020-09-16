@@ -2,7 +2,12 @@ const path = require('path');
 const restify = require('restify');
 const Errors = require('restify-errors');
 const corsMiddleware = require('restify-cors-middleware');
+
+const serverLogger = require('./util/ServerLogger');
+const logger = serverLogger.createLogger('Server');
+
 const user = require('./bl/User');
+const app = require('./bl/App');
 
 
 const createServer=()=>{
@@ -18,7 +23,7 @@ const createServer=()=>{
     server.pre(restify.pre.sanitizePath());
     server.pre(restify.pre.userAgentConnection());
 
-    const corsAllowHeadersArray =[]
+    const corsAllowHeadersArray =[];
     corsAllowHeadersArray.push('auth-token');
     corsAllowHeadersArray.push('user-name');
     corsAllowHeadersArray.push('user-type');
@@ -49,12 +54,31 @@ const createServer=()=>{
     server.get('/docs/*', // don't forget the `/*`
         restify.plugins.serveStaticFiles('./public/docs')
     );
+
+
+
     server.get('/api/user', user.queryUser);
-    server.get('/api/user/:userId', user.updateUser);
-    server.post({path:'/api/user',contentType: 'application/json'}, user.addUser);
+    // server.get('/api/user/:userId', user.updateUser);
+    // server.post({path:'/api/user',contentType: 'application/json'}, user.addUser);
+
+    /**
+     app
+     */
+    server.get('/api/app', app.queryApp);
+    server.get('/api/user/:userId/app', app.queryApp);
+
+    server.get('/api/adminUser/:adminUserId/app', app.queryApp);
+    server.post({path:'/api/adminUser/:adminUserId/app',contentType: 'application/json'}, app.addApp);
+    server.put({path:'/api/adminUser/:adminUserId/app/:appId',contentType: 'application/json'} ,app.updateApp);
+    server.put({path:'/api/adminUser/:adminUserId/app/:appId/status',contentType: 'application/json'} ,app.updateStatus);
+    server.del({path:'/api/adminUser/:adminUserId/app/:appId/del',contentType: 'application/json'},app.deleteApp);
+
+
 
     server.on('NotFound', function (req, res ,err,next) {
-        const error = new Errors.NotFoundError()
+        logger.warn(req.url + " not found");
+
+        const error = new Errors.NotFoundError();
         res.send(error);
         return next();
     });

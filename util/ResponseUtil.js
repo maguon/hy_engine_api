@@ -2,32 +2,29 @@
 const sysError = require('./SystemError.js');
 const sysMsg= require('./SystemMsg.js');
 
-const resetQueryRes = (res,result,errMsg) =>{
-    res.send(200,{success : true,result:result,msg:errMsg});
+const resetQueryRes = (res,rows,count) =>{
+    res.send(200,{success : true,rows,count});
 }
 
-const resetCreateRes = (res,result,errMsg) =>{
-    if(result && result.insertId){
-        res.send(200,{success : true,id:result.insertId});
+const resetCreateRes = (res,rows) =>{
+    res.send(200,{success : true,rows});
+}
+
+const resetUpdateRes = (res,rows)=>{
+    if(rows.length > 0){
+        res.send(200,{success : true,rows});
     }else{
-        res.send(200,{success : false,msg:errMsg});
+        res.send(200,{success : false,rows});
     }
 }
 
-const resetUpdateRes = (res,result,errMsg)=>{
-    if(result && result.affectedRows>0){
-        res.send(200,{success : true});
-    }else{
-        res.send(200,{success : false,msg:errMsg});
-    }
-}
-
-const resetFailedRes = (res,errMsg)=>{
-    res.send(200,{success:false,msg:errMsg});
+const resetFailedRes = (res,error)=>{
+    res.send(200,{success:false,msg:error.message});
 }
 
 const resInternalError = (error , res ,next) => {
-    return next(sysError.InternalError(sysMsg.SYS_INTERNAL_ERROR_MSG));
+    res.send(500,{err:error.message});
+    return next();
 }
 
 module.exports = {
