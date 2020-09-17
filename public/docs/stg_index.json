@@ -69,8 +69,8 @@
           "405": {
             "description": "Validation exception"
           }
-        }
-
+        },
+        "deprecated": true
       },
       "get": {
         "tags": [
@@ -148,7 +148,8 @@
           "400": {
             "description": "Invalid params"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/adminUser/{adminUserId}": {
@@ -197,7 +198,8 @@
           "404": {
             "description": "AdminUserId not found"
           }
-        }
+        },
+        "deprecated": true
       },
       "delete": {
         "tags": [
@@ -226,7 +228,9 @@
           "404": {
             "description": "AdminUserId not found"
           }
-        }
+        },
+        "deprecated": true
+
       }
     },
     "/adminLogin": {
@@ -261,7 +265,8 @@
           "405": {
             "description": "Validation exception"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/user": {
@@ -296,8 +301,8 @@
           "405": {
             "description": "Validation exception"
           }
-        }
-
+        },
+        "deprecated": true
       },
       "get": {
         "tags": [
@@ -345,7 +350,8 @@
           "400": {
             "description": "Invalid params"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/user/{userId}": {
@@ -394,7 +400,8 @@
           "404": {
             "description": "AdminUserId not found"
           }
-        }
+        },
+        "deprecated": true
       },
       "delete": {
         "tags": [
@@ -423,7 +430,8 @@
           "404": {
             "description": "UserId not found"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/userDetail": {
@@ -504,7 +512,8 @@
           "400": {
             "description": "Invalid params"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/userDetail/{userDetailId}": {
@@ -553,7 +562,8 @@
           "404": {
             "description": "UserDetailId not found"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/userId_userDetail/{userId}": {
@@ -602,7 +612,8 @@
           "404": {
             "description": "UserDetailId not found"
           }
-        }
+        },
+        "deprecated": true
       }
     },
 
