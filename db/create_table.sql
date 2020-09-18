@@ -10,7 +10,7 @@ CREATE TABLE public.app_version (
 	id bigserial NOT NULL,
 	app_type int2 NOT NULL, -- app类型(1-新能源)
 	device_type int2 NOT NULL, -- 设备类型(1-安卓 2-苹果)
-	app_version varchar(20) NULL, -- 版本号
+	version_ser varchar(20) NULL, -- 版本号
 	version_num int4 NULL, -- 版本序号
 	min_version_num int4 NULL, -- 最小支持版本
 	force_up_flag int2 NULL, -- 是否强制更新(0-不更新 1-更新)
@@ -26,7 +26,7 @@ CREATE TABLE public.app_version (
 
 COMMENT ON COLUMN public.app_version.app_type IS 'app类型(1-新能源)';
 COMMENT ON COLUMN public.app_version.device_type IS '设备类型(1-安卓 2-苹果)';
-COMMENT ON COLUMN public.app_version.app_version IS '版本号';
+COMMENT ON COLUMN public.app_version.version_ser IS '版本号';
 COMMENT ON COLUMN public.app_version.version_num IS '版本序号';
 COMMENT ON COLUMN public.app_version.min_version_num IS '最小支持版本';
 COMMENT ON COLUMN public.app_version.force_up_flag IS '是否强制更新(0-不更新 1-更新)';

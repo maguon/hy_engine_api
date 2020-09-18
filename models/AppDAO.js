@@ -67,13 +67,13 @@ class AppDAO  {
     }
 
     static async addApp(params) {
-        const query = 'INSERT INTO app_version (app_type , device_type , app_version , version_num , min_version_num , force_up_flag , url , remarks , status) ' +
-            'VALUES (${appType} , ${deviceType} , ${appVersion} , ${versionNum} , ${minVersionNum} , ' +
+        const query = 'INSERT INTO app_version (app_type , device_type , version_ser , version_num , min_version_num , force_up_flag , url , remarks , status) ' +
+            'VALUES (${appType} , ${deviceType} , ${versionSer} , ${versionNum} , ${minVersionNum} , ' +
             '${forceUpFlag} , ${url} , ${remarks} , ${status}) RETURNING id ';
         let valueObj = {};
         valueObj.appType = params.appType;
         valueObj.deviceType = params.deviceType;
-        valueObj.appVersion = params.appVersion;
+        valueObj.versionSer = params.versionSer;
         valueObj.versionNum = params.versionNum;
         valueObj.minVersionNum = params.minVersionNum;
         valueObj.forceUpFlag = params.forceUpFlag;
@@ -85,13 +85,13 @@ class AppDAO  {
     }
 
     static async updateApp(params){
-        const query = 'update app_version set app_type= ${appType} , device_type=${deviceType} , app_version=${appVersion} , version_num=${versionNum} ,  min_version_num=${minVersionNum} , ' +
+        const query = 'update app_version set app_type= ${appType} , device_type=${deviceType} , version_ser=${versionSer} , version_num=${versionNum} ,  min_version_num=${minVersionNum} , ' +
             ' force_up_flag=${forceUpFlag} ,  url=${url} , remarks=${remarks} , updated_on=${updated_on}' +
             'where id =${appId} RETURNING * ';
         let valueObj = {};
         valueObj.appType = params.appType;
         valueObj.deviceType = params.deviceType;
-        valueObj.appVersion = params.appVersion;
+        valueObj.versionSer = params.versionSer;
         valueObj.versionNum = params.versionNum;
         valueObj.minVersionNum = params.minVersionNum;
         valueObj.forceUpFlag = params.forceUpFlag;

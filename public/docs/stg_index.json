@@ -1172,7 +1172,7 @@
       "required": [
         "appType",
         "deviceType",
-        "appVersion",
+        "versionSer",
         "versionNum",
         "minVersionNum",
         "forceUpFlag",
@@ -1196,7 +1196,7 @@
             2
           ]
         },
-        "appVersion": {
+        "versionSer": {
           "type": "string"
         },
         "versionNum": {

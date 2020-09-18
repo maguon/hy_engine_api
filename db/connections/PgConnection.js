@@ -1,6 +1,6 @@
 const serverLogger = require('../../util/ServerLogger.js');
 const logger = serverLogger.createLogger('PgConnections.js');
-const systemConfig = require('../../config/SystemConfig')
+const systemConfig = require('../../config/SystemConfig');
 let initOptions  = {};
 if(systemConfig.pgConfig.initOptions.native){
     initOptions = {query(e) {
